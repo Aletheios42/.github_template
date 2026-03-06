@@ -1,0 +1,12 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: dagger/dagger-action@v1
+  #       with:
+  #         version: "latest"
+  #         args: call lint-go --src src # la carpeta a la que quieres pasarle el linter
