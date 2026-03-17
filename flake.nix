@@ -19,7 +19,7 @@
         };
 
         debug = pkgs.mkShell {
-          packages = commonPackages ++ [ pkgs.strace pkgs.ltrace ];
+          packages = commonPackages ++ [ pkgs.ltrace ];
           env.profile = "DEBUG";
           shellHook = ''
             source ${./scripts/debug.sh}
@@ -27,7 +27,25 @@
         };
 
         ci = pkgs.mkShell {
-          packages = commonPackages ++ [ pkgs.megalinter ];
+          packages = commonPackages ++ [
+            # Systems
+            # pkgs.clang-tools pkgs.cppcheck pkgs.zig
+            # # Backend
+            # pkgs.golangci-lint pkgs.rustfmt pkgs.clippy pkgs.elixir pkgs.phpcs
+            # # Scripting
+            # pkgs.ruff pkgs.mypy pkgs.luacheck
+            # # Frontend
+            # pkgs.nodePackages.eslint
+            # # Infra
+            # pkgs.tflint pkgs.checkov pkgs.trivy pkgs.buf
+            # # Nix
+            # pkgs.nixpkgs-fmt pkgs.statix pkgs.deadnix
+            # # Docs & Config
+            # pkgs.shellcheck pkgs.hadolint pkgs.yamllint pkgs.markdownlint-cli pkgs.sqlfluff pkgs.typst
+            #
+            # SAST
+            pkgs.actionlint pkgs.semgrep
+          ];
           env.profile = "CI";
           shellHook = ''
             source ${./scripts/ci.sh}
