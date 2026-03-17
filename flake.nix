@@ -1,7 +1,6 @@
 {
   description = "mi proyecto";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
   outputs = { self, nixpkgs }:
     let
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
@@ -9,11 +8,29 @@
     in {
       devShells = forAllSystems (system: let
         pkgs = nixpkgs.legacyPackages.${system};
+        commonPackages = [ pkgs.git pkgs.gnumake ];
       in {
-        default = pkgs.mkShell {
-          packages = [ pkgs.example1 pkgs.example2 ];
+        dev = pkgs.mkShell {
+          packages = commonPackages ++ [ ];
+          env.profile = "DEV";
           shellHook = ''
-            echo "entorno listo"
+            source ${./scripts/dev.sh}
+          '';
+        };
+
+        debug = pkgs.mkShell {
+          packages = commonPackages ++ [ pkgs.strace pkgs.ltrace ];
+          env.profile = "DEBUG";
+          shellHook = ''
+            source ${./scripts/debug.sh}
+          '';
+        };
+
+        ci = pkgs.mkShell {
+          packages = commonPackages ++ [ pkgs.megalinter ];
+          env.profile = "CI";
+          shellHook = ''
+            source ${./scripts/ci.sh}
           '';
         };
       });
