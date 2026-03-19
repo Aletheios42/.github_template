@@ -14,7 +14,7 @@
           packages = commonPackages ++ [ ];
           env.profile = "DEV";
           shellHook = ''
-            source ${./scripts/dev.sh}
+            source ${./scripts/help.sh}
           '';
         };
 
@@ -22,7 +22,7 @@
           packages = commonPackages ++ [ pkgs.ltrace ];
           env.profile = "DEBUG";
           shellHook = ''
-            source ${./scripts/debug.sh}
+            source ${./scripts/help.sh}
           '';
         };
 
@@ -44,11 +44,11 @@
             # pkgs.shellcheck pkgs.hadolint pkgs.yamllint pkgs.markdownlint-cli pkgs.sqlfluff pkgs.typst
             #
             # SAST
-            pkgs.actionlint pkgs.semgrep
+            # pkgs.actionlint pkgs.semgrep
           ];
           env.profile = "CI";
           shellHook = ''
-            source ${./scripts/ci.sh}
+            source ${./scripts/help.sh}
           '';
         };
       });

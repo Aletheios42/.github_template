@@ -1,3 +1,4 @@
+---
 name: Bug report
 about: Reporta un comportamiento inesperado
 labels: bug

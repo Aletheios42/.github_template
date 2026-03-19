@@ -1,3 +1,4 @@
+---
 name: Question
 about: Duda sobre el proyecto
 labels: question

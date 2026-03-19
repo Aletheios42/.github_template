@@ -1,3 +1,4 @@
+---
 name: Feature request
 about: Propuesta de nueva funcionalidad
 labels: enhancement
