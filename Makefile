@@ -3,9 +3,8 @@
 help: ## Muestra esta ayuda
 	@grep -E '^[a-zA-Z_-]+:.*##' $(MAKEFILE_LIST) | awk -F'##' '{printf "%-15s %s\n", $$1, $$2}'
 
-env: ## Activa direnv y el flake
+env: ## Activa direnv
 	direnv allow
-	nix develop .#dev
 
 dev: ## Ejecuta una shell con todo lo necesario para desarrollar
 	nix develop .#dev
@@ -15,3 +14,4 @@ debug: ## Ejecuta una shell con todo lo necesario para debugear
 
 ci: ## Ejecuta pipeline CI local
 	nix develop .#ci --command bash scripts/ci.sh
+

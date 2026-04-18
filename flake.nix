@@ -1,5 +1,5 @@
 {
-  description = "mi proyecto";
+  description = "Esto es un template para normalizar mis repositorios, recuerda cambiarla para tu proyecto específico";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   outputs = { self, nixpkgs }:
     let
@@ -13,17 +13,11 @@
         dev = pkgs.mkShell {
           packages = commonPackages ++ [ ];
           env.profile = "DEV";
-          shellHook = ''
-            source ${./scripts/help.sh}
-          '';
         };
 
         debug = pkgs.mkShell {
           packages = commonPackages ++ [ pkgs.ltrace ];
           env.profile = "DEBUG";
-          shellHook = ''
-            source ${./scripts/help.sh}
-          '';
         };
 
         ci = pkgs.mkShell {
@@ -44,13 +38,11 @@
             # pkgs.shellcheck pkgs.hadolint pkgs.yamllint pkgs.markdownlint-cli pkgs.sqlfluff pkgs.typst
             #
             # SAST
-            # pkgs.actionlint pkgs.semgrep
+            pkgs.actionlint pkgs.semgrep
           ];
           env.profile = "CI";
-          shellHook = ''
-            source ${./scripts/help.sh}
-          '';
         };
       });
     };
 }
+
